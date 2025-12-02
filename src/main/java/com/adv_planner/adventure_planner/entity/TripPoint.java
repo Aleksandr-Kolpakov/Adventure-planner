@@ -1,6 +1,5 @@
 package com.adv_planner.adventure_planner.entity;
 
-
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 

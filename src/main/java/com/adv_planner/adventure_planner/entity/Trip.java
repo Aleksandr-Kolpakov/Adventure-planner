@@ -1,6 +1,9 @@
 package com.adv_planner.adventure_planner.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -15,11 +18,16 @@ public class Trip {
     private String description;
     private LocalDate startDate;
     private LocalDate endDate;
+
+    @Column(name = "created_at")
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id")
+    @JsonIgnore
     private User creator;
+
 
     public Trip() {}
 
@@ -87,4 +95,5 @@ public class Trip {
     public void setCreator(User creator) {
         this.creator = creator;
     }
+
 }

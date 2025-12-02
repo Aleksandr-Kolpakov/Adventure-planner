@@ -58,11 +58,7 @@ public class UserController {
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserDTO userDto) {
        Optional<User> updatedUserOpt = userService.updateUser(id, userDto);
 
-       if (updatedUserOpt.isPresent()) {
-           return ResponseEntity.ok(updatedUserOpt.get());
-       } else {
-           return ResponseEntity.notFound().build();
-       }
+        return updatedUserOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // delete user
