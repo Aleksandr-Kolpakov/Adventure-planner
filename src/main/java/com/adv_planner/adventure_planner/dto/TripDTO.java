@@ -1,14 +1,12 @@
 package com.adv_planner.adventure_planner.dto;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class TripDTO {
     private String title;
     private String description;
     private LocalDate startDate;
     private LocalDate endDate;
-    private LocalDateTime createdAt;
     private Long creatorId;
 
 
@@ -51,14 +49,5 @@ public class TripDTO {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
 
 }

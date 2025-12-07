@@ -3,7 +3,7 @@ package com.adv_planner.adventure_planner.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "participant")
 public class User {
 
     @Id

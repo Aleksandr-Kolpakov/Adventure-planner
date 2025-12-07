@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class TripController {
@@ -21,23 +20,26 @@ public class TripController {
         this.tripService = tripService;
     }
 
-    // create trip
+
+// create trip
     @PostMapping("/api/trips")
     ResponseEntity<Trip> createTrip(@RequestBody TripDTO tripDto) {
         Trip trip = tripService.createTrip(tripDto);
 
-        return new ResponseEntity<>(trip, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(trip);
     }
 
-    // get trip by id
+
+// get trip by id
     @GetMapping("/api/trips/{id}")
     ResponseEntity<Trip> getTrip(@PathVariable Long id) {
-        Optional<Trip> tripOptional = tripService.getTripById(id);
+        Trip trip = tripService.getTripById(id);
 
-        return tripOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(trip);
     }
 
-    // get all trips
+
+// get all trips
     @GetMapping("/api/trips")
     ResponseEntity<List<Trip>> getAllTrips() {
         List<Trip> tripList = tripService.getAllTrips();
@@ -45,15 +47,17 @@ public class TripController {
         return ResponseEntity.ok(tripList);
     }
 
-    // update trip
+
+// update trip
     @PutMapping("/api/trips/{id}")
     ResponseEntity<Trip> updateTrip(@PathVariable Long id, @RequestBody TripDTO tripDto) {
-        Optional<Trip> updateCurrentTrip = tripService.updateTrip(id, tripDto);
+        Trip trip = tripService.updateTrip(id, tripDto);
 
-        return updateCurrentTrip.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(trip);
     }
 
-    // delete trip
+
+// delete trip
     @DeleteMapping("/api/trips/{id}")
     ResponseEntity<Trip> deleteTrip(@PathVariable Long id) {
         try {

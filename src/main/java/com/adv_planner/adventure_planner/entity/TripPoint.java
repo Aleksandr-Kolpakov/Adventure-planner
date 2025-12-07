@@ -1,11 +1,12 @@
 package com.adv_planner.adventure_planner.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "trip_points")
+@Table(name = "trip_point")
 public class TripPoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +19,7 @@ public class TripPoint {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trip_id")
+    @JsonIgnore
     private Trip trip;
 
     public TripPoint() {}
@@ -32,10 +34,6 @@ public class TripPoint {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {
